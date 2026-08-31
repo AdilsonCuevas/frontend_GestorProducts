@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: HomeIcon },
-  { name: "Productos", href: "/products", icon: PackageIcon },
+  { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon },
+  { name: "Productos", href: "/admin/products", icon: PackageIcon },
 ];
 
 export function Sidebar() {
