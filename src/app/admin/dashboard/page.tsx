@@ -69,11 +69,11 @@ export default function DashboardPage() {
       <div className="mt-8 rounded-xl bg-white p-6 shadow-sm">
         <h2 className="text-lg font-semibold text-gray-900 mb-4">Accesos rápidos</h2>
         <div className="flex flex-wrap gap-4">
-          <Link href="/admin/products/create" className="inline-flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition">
+          <Link href="/admin/categorias" className="inline-flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
-            Crear producto
+            Ver categorias
           </Link>
           <Link href="/admin/products" className="inline-flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

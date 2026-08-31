@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ProductFormData } from "@/types/product";
 import { createProduct, updateProduct } from "@/services/product.client";
 import { getProductById } from "@/services/product.service";
+import { CategorySelect } from "@/components/categories/CategorySelect";
 
 interface ProductFormProps {
   initialData?: ProductFormData;
@@ -213,23 +214,16 @@ export function ProductForm({ initialData, productId, onSuccess }: ProductFormPr
             </div>
           </div>
 
-          <div>
-            <label htmlFor="category_id" className="block text-sm font-medium text-gray-700 mb-1">
-              Categoría
-            </label>
-            <select
-              id="category_id"
-              name="category_id"
-              value={formData.category_id}
-              onChange={handleChange}
-              className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-black focus:outline-none focus:ring-2 focus:ring-black/20 transition"
-              disabled={submitting}
-            >
-              <option value="9">Seleccione una categoría</option>
-              <option value="10">Electrónicos</option>
-              <option value="11">Ropa</option>
-            </select>
-          </div>
+          <CategorySelect
+            value={formData.category_id}
+            onChange={(value) =>
+              setFormData((prev) => ({
+                ...prev,
+                category_id: value,
+              }))
+            }
+            disabled={submitting}
+          />
 
           <div>
             <label htmlFor="image_url" className="block text-sm font-medium text-gray-700 mb-1">
