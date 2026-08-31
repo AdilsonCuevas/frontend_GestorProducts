@@ -40,7 +40,7 @@ export default function EditProductPage() {
   }, [productId]);
 
   const handleSuccess = () => {
-    router.push("admin/products");
+    router.push("/admin/products");
     router.refresh();
   };
 
