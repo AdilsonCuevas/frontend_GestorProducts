@@ -7,7 +7,7 @@ export default function CreateProductPage() {
   const router = useRouter();
 
   const handleSuccess = () => {
-    router.push("/products");
+    router.push("admin/products");
     router.refresh();
   };
 

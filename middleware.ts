@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const PROTECTED_PATHS = [
-  "/dashboard",
-  "/products",
-  "/products/create",
-  "/products/edit",
+  "/admin/dashboard",
+  "/admin/products",
+  "/admin/products/create",
+  "/admin/products/edit",
 ];
 
 const PUBLIC_PATHS = ["/login", "/registro"];
@@ -52,9 +52,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/dashboard/:path*",
-    "/products/:path*",
-    "/((?!_next|api|static|.*\\..*).*)",
-  ],
+   matcher: ['/admin/:path*'],
 };

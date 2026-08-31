@@ -13,10 +13,13 @@ export interface RegisterRequest {
 }
 
 export interface AuthResponse {
-  token?: string;
-  user?: {
-    id: string;
-    email: string;
+  data?: {
+    token?: string;
+    user?: {
+      id: string;
+      email: string;
+    };
   };
+  
   message?: string;
 }

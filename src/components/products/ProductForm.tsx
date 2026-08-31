@@ -19,7 +19,7 @@ const initialFormData: ProductFormData = {
   stock: 0,
   category_id: "",
   isActive: true,
-  image_url: "",
+  code: "",
 };
 
 export function ProductForm({ initialData, productId, onSuccess }: ProductFormProps) {
@@ -46,7 +46,7 @@ export function ProductForm({ initialData, productId, onSuccess }: ProductFormPr
               stock: product.stock,
               category_id: product.category_id ?? "",
               isActive: product.isActive,
-              image_url: product.image_url ?? "",
+              code: product.code ?? "",
             });
           } else if (!cancelled) {
             setError("Producto no encontrado");
@@ -225,26 +225,23 @@ export function ProductForm({ initialData, productId, onSuccess }: ProductFormPr
               className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 focus:border-black focus:outline-none focus:ring-2 focus:ring-black/20 transition"
               disabled={submitting}
             >
-              <option value="">Seleccione una categoría</option>
-              <option value="electronics">Electrónicos</option>
-              <option value="clothing">Ropa</option>
-              <option value="home">Hogar</option>
-              <option value="sports">Deportes</option>
+              <option value="9">Seleccione una categoría</option>
+              <option value="10">Electrónicos</option>
+              <option value="11">Ropa</option>
             </select>
           </div>
 
           <div>
             <label htmlFor="image_url" className="block text-sm font-medium text-gray-700 mb-1">
-              URL de imagen
+              Codigo del producto
             </label>
             <input
-              id="image_url"
-              name="image_url"
-              type="url"
-              value={formData.image_url}
+              id="code"
+              name="code"
+              value={formData.code}
               onChange={handleChange}
               className="w-full rounded-lg border border-gray-300 px-4 py-3 text-gray-900 placeholder-gray-400 focus:border-black focus:outline-none focus:ring-2 focus:ring-black/20 transition"
-              placeholder="https://ejemplo.com/imagen.jpg"
+              placeholder="-------"
               disabled={submitting}
             />
           </div>

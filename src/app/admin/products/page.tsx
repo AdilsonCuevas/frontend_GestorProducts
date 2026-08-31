@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { getProducts } from "@/services/product.service";
 import { deleteProduct } from "@/services/product.client";
@@ -13,6 +13,10 @@ export default function ProductsPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
 
   const fetchProducts = async () => {
     try {
@@ -100,21 +104,10 @@ export default function ProductsPage() {
                 {products.map((product) => (
                   <tr key={product.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        {product.image_url && (
-                          <img
-                            src={product.image_url}
-                            alt={product.nombre}
-                            className="h-12 w-12 rounded-lg object-cover"
-                          />
-                        )}
-                        <div>
                           <p className="text-sm font-medium text-gray-900">{product.nombre}</p>
                           {product.description && (
                             <p className="text-sm text-gray-500 truncate max-w-xs">{product.description}</p>
                           )}
-                        </div>
-                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <p className="text-sm text-gray-900">

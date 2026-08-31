@@ -17,5 +17,6 @@ export async function getProducts(): Promise<Product[]> {
 
 export async function getProductById(id: string): Promise<Product | null> {
   const products = await getProducts();
-  return products.find((p) => p.id === id) ?? null;
+  const produc = products.find((p) => Number(p.id) === Number(id)) ?? null;
+  return produc;
 }

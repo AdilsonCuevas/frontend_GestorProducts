@@ -22,10 +22,10 @@ export default function LoginPage() {
 
     try {
       const response = await login({ email, password });
-      if (response.token) {
-        setAuthToken(response.token);
+      if (response.data?.token) {
+        setAuthToken(response.data.token);
       }
-      router.push("/");
+      router.push("admin/dashboard");
       router.refresh();
     } catch {
       setError("Credenciales inválidas. Intente nuevamente.");

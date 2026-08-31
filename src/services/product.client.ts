@@ -19,6 +19,7 @@ export async function createProduct(data: ProductFormData): Promise<Product> {
 
 export async function updateProduct(id: string, data: ProductFormData): Promise<Product> {
   const token = getAuthToken();
+  console.log("token", token);
   if (!token) {
     throw new Error("No hay token de autenticación");
   }

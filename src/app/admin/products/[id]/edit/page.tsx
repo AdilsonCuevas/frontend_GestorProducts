@@ -26,7 +26,7 @@ export default function EditProductPage() {
             stock: product.stock,
             category_id: product.category_id ?? "",
             isActive: product.isActive,
-            image_url: product.image_url ?? "",
+            code: product.code ?? "",
           };
           setInitialData(data);
           setFormKey((k) => k + 1); // Force remount of ProductForm with new data
@@ -40,7 +40,7 @@ export default function EditProductPage() {
   }, [productId]);
 
   const handleSuccess = () => {
-    router.push("/products");
+    router.push("admin/products");
     router.refresh();
   };
 

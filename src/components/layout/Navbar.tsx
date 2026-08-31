@@ -53,7 +53,7 @@ export function Navbar({ onMenuClick, mobileMenuOpen }: NavbarProps) {
           <div className="space-y-1 px-4 py-4">
             <nav className="space-y-1" aria-label="Mobile navigation">
               <Link
-                href="/dashboard"
+                href="admin/dashboard"
                 className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
               >
                 <svg
@@ -73,7 +73,7 @@ export function Navbar({ onMenuClick, mobileMenuOpen }: NavbarProps) {
                 Dashboard
               </Link>
               <Link
-                href="/products"
+                href="admin/products"
                 className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
               >
                 <svg
