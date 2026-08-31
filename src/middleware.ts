@@ -6,6 +6,9 @@ const PROTECTED_PATHS = [
   "/admin/products",
   "/admin/products/create",
   "/admin/products/edit",
+  "/admin/categorias",
+  "/admin/categorias/create",
+  "/admin/categorias/edit",
 ];
 
 const PUBLIC_PATHS = ["/login", "/registro"];

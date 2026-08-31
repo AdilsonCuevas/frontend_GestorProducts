@@ -14,10 +14,6 @@ export default function ProductsPage() {
   const [error, setError] = useState("");
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
   const fetchProducts = async () => {
     try {
       setLoading(true);
@@ -29,6 +25,11 @@ export default function ProductsPage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchProducts();
+  }, []);
 
   const handleDelete = async (id: string) => {
     if (!confirm("¿Está seguro de que desea eliminar este producto?")) return;
@@ -64,7 +65,7 @@ export default function ProductsPage() {
           <p className="mt-2 text-gray-600">{products.length} productos encontrados</p>
         </div>
         <Link
-          href="/products/create"
+          href="/admin/products/create"
           className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition"
         >
           Crear producto
@@ -81,7 +82,7 @@ export default function ProductsPage() {
           <h3 className="mt-4 text-lg font-medium text-gray-900">No hay productos</h3>
           <p className="mt-2 text-gray-500">Comience creando su primer producto.</p>
           <Link
-            href="/products/create"
+            href="/admin/products/create"
             className="mt-6 inline-flex items-center gap-2 rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 transition"
           >
             Crear producto
@@ -128,7 +129,7 @@ export default function ProductsPage() {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <Link
-                        href={`/products/${product.id}/edit`}
+                        href={`/admin/products/${product.id}/edit`}
                         className="text-black hover:underline mr-4"
                       >
                         Editar
