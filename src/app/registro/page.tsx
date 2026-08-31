@@ -39,7 +39,7 @@ export default function RegisterPage() {
       await register({ firstName, lastName, email, phone, nit, password });
       router.push("/login");
       router.refresh();
-    } catch (err) {
+    } catch {
       setError("Error al registrarse. Intente nuevamente.");
     } finally {
       setLoading(false);

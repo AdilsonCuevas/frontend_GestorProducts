@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { getProductById } from "@/services/product.service";
-import { Product } from "@/types/product";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -33,9 +33,9 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
       <main className="flex-1 mx-auto max-w-7xl px-6 py-10 w-full">
         <nav className="mb-6 text-sm text-gray-500" aria-label="Breadcrumb">
           <ol className="flex items-center space-x-2">
-            <li>
-              <a href="/" className="hover:underline">Inicio</a>
-            </li>
+<li>
+  <Link href="/" className="hover:underline">Inicio</Link>
+</li>
             <li aria-current="page">
               <span className="mx-2">/</span>
               <span className="font-medium text-gray-900">{product.nombre}</span>
@@ -99,12 +99,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           </div>
 
           <div className="mt-8">
-            <a
+            <Link
               href="/"
               className="inline-flex items-center gap-2 rounded-lg bg-black px-6 py-3 text-sm font-medium text-white transition hover:bg-gray-800"
             >
               ← Volver a productos
-            </a>
+            </Link>
           </div>
         </article>
       </main>

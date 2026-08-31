@@ -16,3 +16,14 @@ export async function fetchApi<T>(endpoint: string, options?: RequestInit): Prom
 
   return response.json();
 }
+
+export async function fetchAuthApi<T>(endpoint: string, token: string, options?: RequestInit): Promise<T> {
+  return fetchApi<T>(endpoint, {
+    ...options,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+      ...options?.headers,
+    },
+  });
+}

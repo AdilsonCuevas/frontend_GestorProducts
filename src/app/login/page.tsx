@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { login } from "@/services/auth.service";
+import { setAuthToken } from "@/lib/auth";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -20,10 +21,13 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await login({ email, password });
+      const response = await login({ email, password });
+      if (response.token) {
+        setAuthToken(response.token);
+      }
       router.push("/");
       router.refresh();
-    } catch (err) {
+    } catch {
       setError("Credenciales inválidas. Intente nuevamente.");
     } finally {
       setLoading(false);
