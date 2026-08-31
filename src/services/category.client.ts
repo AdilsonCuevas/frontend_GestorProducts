@@ -1,6 +1,6 @@
 "use client";
 
-import { Category, CategoryFormData } from "@/types/category";
+import { Category, CategoryFormData, CategoryResponse, CategoryResponses } from "@/types/category";
 import { fetchAuthApi } from "@/lib/api";
 import { getAuthToken } from "@/lib/auth";
 
@@ -12,7 +12,8 @@ export async function getCategories(): Promise<Category[]> {
     throw new Error("No hay token de autenticación");
   }
   try {
-    return await fetchAuthApi<Category[]>(BASE_PATH, token);
+    const res = await fetchAuthApi<CategoryResponse>(BASE_PATH, token);
+    return res.message;
   } catch {
     return [];
   }
@@ -24,7 +25,8 @@ export async function getCategoryById(id: string): Promise<Category | null> {
     throw new Error("No hay token de autenticación");
   }
   try {
-    return await fetchAuthApi<Category>(`${BASE_PATH}/${id}`, token);
+    const res = await fetchAuthApi<CategoryResponses>(`${BASE_PATH}/${id}`, token);
+    return res.message
   } catch {
     return null;
   }
