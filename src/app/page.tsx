@@ -1,69 +1,112 @@
-import Image from "next/image";
+import { getProducts } from "@/services/product.service";
+import { Product } from "@/types/product";
 
-export default function Home() {
+export default async function Home() {
+  let products: Product[] = [];
+  let error = "";
+
+  try {
+    products = await getProducts();
+  } catch (e) {
+    error = "No fue posible cargar los productos.";
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main className="min-h-screen bg-gray-100">
+      {/* Header */}
+      <header className="border-b bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-6">
+          <h1 className="text-3xl font-bold text-gray-900">
+            Tienda
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+
+          <p className="mt-1 text-gray-500">
+            Nuestros productos
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </header>
+
+      {/* Contenido */}
+      <section className="mx-auto max-w-7xl px-6 py-10">
+        {error ? (
+          <div className="rounded-lg border border-red-200 bg-red-50 p-5 text-red-700">
+            {error}
+          </div>
+        ) : products.length === 0 ? (
+          <div className="rounded-lg bg-white p-10 text-center shadow-sm">
+            <p className="text-gray-500">
+              No hay productos disponibles.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="mb-6">
+              <h2 className="text-xl font-semibold text-gray-900">
+                Productos
+              </h2>
+
+              <p className="text-sm text-gray-500">
+                {products.length} productos encontrados
+              </p>
+            </div>
+
+            {/* Grid */}
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {products.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </section>
+    </main>
+  );
+}
+
+function ProductCard({ product }: { product: Product }) {
+  return (
+    <article className="flex flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+      {/* Sin imagen */}
+
+      <div className="mb-4 flex items-center justify-between">
+        <span
+          className={`rounded-full px-3 py-1 text-xs font-medium ${
+            product.isActive
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {product.isActive ? "Disponible" : "Inactivo"}
+        </span>
+
+        <span className="text-sm text-gray-500">
+          Stock: {product.stock}
+        </span>
+      </div>
+
+      <h3 className="text-lg font-semibold text-gray-900">
+        {product.nombre}
+      </h3>
+
+      <p className="mt-2 min-h-[48px] text-sm leading-6 text-gray-500">
+        {product.description || "Sin descripción disponible."}
+      </p>
+
+      <div className="mt-auto pt-6">
+        <p className="text-2xl font-bold text-gray-900">
+          ${Number(product.price).toLocaleString("es-CO")}
+        </p>
+
+        <button
+          type="button"
+          className="mt-4 w-full rounded-lg bg-black px-4 py-3 text-sm font-medium text-white transition hover:bg-gray-800"
+        >
+          Ver producto
+        </button>
+      </div>
+    </article>
   );
 }
