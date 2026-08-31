@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vyrtium Media SAS",
+  title: "Tienda",
   description: "Catálogo de productos",
 };
 
